@@ -26,12 +26,12 @@ A hilariously evil Python prank that creates a window asking "Are you Dumb?" wit
 
 1. Clone this repository or download the ZIP file:
    ```bash
-   git clone https://github.com/yourusername/are-you-dumb-prank.git
+   git clone https://github.com/Abdulkarim9/prank-friend.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd are-you-dumb-prank
+   cd prank-friend
    ```
 
 3. Run the prank:
