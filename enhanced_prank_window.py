@@ -67,6 +67,16 @@ def move_button(event):
         colors = ["#FFD1DC", "#CAE1FF", "#E0FFD1", "#FFE8D1", "#E5D1FF"]
         root.config(bg=random.choice(colors))
         main_frame.config(bg=random.choice(colors))
+    
+    # Return "break" to prevent the click from registering
+    return "break"
+
+def handle_click_attempt(event):
+    """Handle direct click attempts on the 'No' button (for touchscreens)"""
+    # Call the move_button function to move the button away
+    move_button(event)
+    # Return "break" to prevent the click from registering
+    return "break"
 
 def on_yes_click():
     """Close the window when 'Yes' is clicked"""
@@ -93,6 +103,45 @@ def on_yes_click():
     
     # Make sure the main window stays open until they close the stats window
     root.withdraw()
+
+def prevent_close():
+    """Prevent window from being closed with X button"""
+    # Increment attempts as a penalty for trying to close the window
+    global attempts
+    attempts += 2
+    
+    # Update message to taunt them for trying to close the window
+    special_messages = [
+        "Nice try! You can't escape that easily!",
+        "The X button won't save you!",
+        "There's only ONE way out...",
+        "Alt+F4 won't work either!",
+        "Just admit it already!"
+    ]
+    attempt_label.config(text=f"{random.choice(special_messages)}\nAttempts: {attempts}")
+    
+    # Change background color to indicate they tried to cheat
+    root.config(bg="#FF9999")  # Light red
+    main_frame.config(bg="#FF9999")
+    
+    # Return 'break' to prevent the window from closing
+    return "break"
+
+def handle_keypress(event):
+    """Handle keyboard events to prevent Alt+F4 and other escape attempts"""
+    # Check for Alt+F4 (and other common exit key combinations)
+    if event.keysym == 'F4' and (event.state & 0x20000):  # Alt key
+        prevent_close()
+        return "break"
+    elif event.keysym == 'Escape':
+        prevent_close()
+        return "break"
+    elif event.keysym == 'w' and (event.state & 0x4):  # Ctrl+W
+        prevent_close()
+        return "break"
+    elif event.keysym == 'q' and (event.state & 0x4):  # Ctrl+Q
+        prevent_close()
+        return "break"
 
 # Create the main window
 root = tk.Tk()
@@ -162,8 +211,25 @@ attempt_label = tk.Label(
 )
 attempt_label.pack(side=tk.BOTTOM, pady=20)
 
-# Bind the motion event to the 'No' button
-no_button.bind("<Enter>", move_button)
+# Bind events to the 'No' button
+no_button.bind("<Enter>", move_button)  # Mouse hover
+no_button.bind("<Button-1>", handle_click_attempt)  # Left mouse click
+no_button.bind("<ButtonPress-1>", handle_click_attempt)  # Alternative click event
+no_button.bind("<ButtonRelease-1>", handle_click_attempt)  # Button release
+no_button.bind("<Double-Button-1>", handle_click_attempt)  # Double click
+no_button.bind("<Triple-Button-1>", handle_click_attempt)  # Triple click
+# Remove the invalid Touch event binding
+# no_button.bind("<Touch>", handle_click_attempt)  # Touch event (for touchscreens)
+
+# Add additional bindings to catch touch events (which are translated to mouse events)
+no_button.bind("<Motion>", move_button)  # Any mouse movement over the button
+no_button.bind("<Leave>", move_button)  # When mouse leaves the button
+
+# Override the close button (X) functionality
+root.protocol("WM_DELETE_WINDOW", prevent_close)
+
+# Bind keyboard events to prevent Alt+F4 and other escape methods
+root.bind("<Key>", handle_keypress)
 
 # Run the application
 root.mainloop() 

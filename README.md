@@ -4,15 +4,17 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Evil Level](https://img.shields.io/badge/evil%20level-maximum-red)
 
-A hilariously evil Python prank that creates a window asking "Are you Dumb?" with Yes/No buttons. The twist? The "No" button runs away from the cursor whenever someone tries to click it, making it impossible to click! Your victims will eventually have to click "Yes" to close the window, essentially admitting they're dumb.
+A hilariously evil Python prank that creates a window asking "Are you Dumb?" with Yes/No buttons. The twist? The "No" button runs away from the cursor whenever someone tries to click it, making it impossible to click! Even better, the window can't be closed using normal methods (X button, Alt+F4, etc.) - your victims will eventually have to click "Yes" to close the window, essentially admitting they're dumb.
 
 ![Demo Screenshot](https://i.imgur.com/placeholder-add-your-screenshot.png)
 
 ## 😈 Features
 
 - **Impossible "No" Button**: Dodges the mouse cursor whenever it gets close
+- **Touchscreen Protected**: Works on touchscreen devices too - the button moves before touch can register
+- **Inescapable Window**: Can't be closed with X button, Alt+F4, Escape, or other standard methods
 - **Taunting Messages**: Displays increasingly frustrating messages as they try to deny
-- **Attempt Counter**: Tracks how many times they've tried to click "No"
+- **Attempt Counter**: Tracks how many times they've tried to click "No" or escape
 - **Color-Changing UI**: Background changes colors randomly to add to the frustration
 - **Stats Screen**: Shows a final screen with attempt count and time spent when they finally give up
 - **Modern UI**: Clean, attractive interface with smooth animations
@@ -95,6 +97,17 @@ messages = [
     "Nice try!",
     "Too slow!",
     "Not even close!",
+    # ... other messages
+]
+```
+
+You can also customize the special messages that appear when they try to close the window:
+
+```python
+special_messages = [
+    "Nice try! You can't escape that easily!",
+    "The X button won't save you!",
+    "There's only ONE way out...",
     # ... other messages
 ]
 ```
