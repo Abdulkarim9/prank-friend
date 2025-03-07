@@ -6,7 +6,6 @@
 
 A hilariously evil Python prank that creates a window asking "Are you Dumb?" with Yes/No buttons. The twist? The "No" button runs away from the cursor whenever someone tries to click it, making it impossible to click! Even better, the window can't be closed using normal methods (X button, Alt+F4, etc.) - your victims will eventually have to click "Yes" to close the window, essentially admitting they're dumb.
 
-![Demo Screenshot](https://i.imgur.com/placeholder-add-your-screenshot.png)
 
 ## 😈 Features
 
@@ -29,12 +28,12 @@ A hilariously evil Python prank that creates a window asking "Are you Dumb?" wit
 
 1. Clone this repository or download the ZIP file:
    ```bash
-   git clone https://github.com/yourusername/are-you-dumb-prank.git
+   git clone https://github.com/Abdulkarim9/prank-friend.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd are-you-dumb-prank
+   cd prank-friend
    ```
 
 3. Run the prank:
